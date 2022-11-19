@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <div class="form-floating mb-2">
+            {{ form.title(class_='form-control', id='title', maxlength=128) }}
+            {{ form.title.label(for='title') }}
+            </div>
+            <div class="form-floating mb-2">
+            {{ form.instructions(class_='form-control', id='instructions', rows=6) }}
+            {{ form.instructions.label(for='instructions') }}
+            </div>
+            <div class="form-floating mb-2">
+            {{ form.email(class_='form-control', id='email', maxlength=128) }}
+            {{ form.email.label(for='email') }}
+            </div>
+            <div class="form-floating mb-2">
+            {{ form.maximum(class_='form-control', id='maximum', min=1, max=500) }}
+            {{ form.maximum.label(for='maximum') }}
+            </div>
+            <div class="form-floating mb-2">
+            {{ form.winners(class_='form-control', id='winners', min=1, max=100) }}
+            {{ form.winners.label(for='winners') }}
+            </div>
+            <div class="form-floating mb-2">
+            {{ form.hours(class_='form-control', id='hours') }}
+            {{ form.hours.label(for='hours') }}
+            </div>
+        </fieldset>
+        {{ form.submit(class_='form-control btn btn-outline-primary') }}
+    </form>
+
+{% endblock %}

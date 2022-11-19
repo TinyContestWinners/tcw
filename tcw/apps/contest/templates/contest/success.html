@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <script>
+        function copyText(){
+            const target = document.getElementById('contest-link');
+            target.select();
+            target.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+        }
+    </script>
+{% if data %}
+    <h3 class="text-center">Success! You contest is now live!</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="container">
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" id="title" value="{{ data.title }}">
+                    <label for="title" >title</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <textarea class="form-control" id="instructions">{{ data.instructions }}</textarea>
+                    <label for="instructions">instructions</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" id="winners" value="{{ data.winners }}">
+                    <label for="winners">number of winners</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" id="max" value="{{ data.max_entrants }}">
+                    <label for="max">max entrants</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" id="expires" value="{{ data.expires }}">
+                    <label for="expires">expires</label>
+                </div>
+            </div>
+            <div class="container">
+                <h3 class="text-center mt-4">Contest Link</h3>
+                <div class="input-group mb-3">
+                    <input type="text" value="{{ url_for('contest.signup', name=data.name, _external=True) }}" class="form-control" id="contest-link">
+                    <button class="btn btn-outline-secondary" type="button" id="copy-clibboard" onclick="copyText()">copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <h2>Whoops!</h2>
+    Something went wrong. The contest data is missing. Sorry.
+{% endif %}
+{% endblock %}
