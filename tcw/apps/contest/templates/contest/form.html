@@ -4,6 +4,7 @@
 
     <form method="POST">
         {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
         <fieldset>
             <div class="form-floating mb-2">
             {{ form.title(class_='form-control', id='title', maxlength=128) }}
@@ -28,6 +29,9 @@
             <div class="form-floating mb-2">
             {{ form.hours(class_='form-control', id='hours') }}
             {{ form.hours.label(for='hours') }}
+            </div>
+            <div class="form-floating mb-2">
+            {{ form.recaptcha(class_='form-control') }}
             </div>
         </fieldset>
         {{ form.submit(class_='form-control btn btn-outline-primary') }}

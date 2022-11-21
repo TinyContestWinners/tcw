@@ -5,7 +5,7 @@ from sqlalchemy import (Column, Integer, Unicode, UnicodeText, DateTime,
 from sqlalchemy.orm import relationship
 from sqlalchemy.schema import UniqueConstraint
 from tcw.database import Base
-
+from tcw.models.ext import MutableDict, JSONEncodedDict
 
 class Contest(Base):
     __tablename__ = 'contests'
@@ -18,28 +18,35 @@ class Contest(Base):
     expires = Column(DateTime, nullable=False, default=func.now())
     winners = Column(Integer, nullable=False, default=1)
     max_entrants = Column(Integer, nullable=False, default=100)
-    final = Column(UnicodeText, nullable=True)
+    attributes = Column(MutableDict.as_mutable(JSONEncodedDict), nullable=True)
 
     # relationships
     entrants = relationship('Entrant', backref='contest', cascade='all,delete')
 
 
     def pick_winners(self):
+        """
+        Pick the winners of the contest.
 
-        if self.final is None:
-            if len(self.entrants) < self.winners:
-                self.winners = len(self.entrants)
+        args:
+            None
+        returns:
+            list - a list of winning names
+        """
 
-            results = []
-            choices = [e.name for e in self.entrants]
-            while len(results) < self.winners:
-                name = secrets.choice(choices)
-                if name not in results:
-                    results.append(name)
+        results = []
 
-            self.final = "|".join(results)
+        # not enough entrants? re-adjust winner size
+        if len(self.entrants) < self.winners:
+            self.winners = len(self.entrants)
 
-        return self.final
+        choices = [e.name for e in self.entrants]
+        while len(results) < self.winners:
+            name = secrets.choice(choices)
+            if name not in results:
+                results.append(name)
+
+        return results
 
 
 class Entrant(Base):

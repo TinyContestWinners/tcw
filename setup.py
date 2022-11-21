@@ -7,7 +7,7 @@ setup(
     name='tcw',
     version='0.0.1',
     author='J Leary',
-    author_email='potnanny@gmail.com',
+    author_email='tinycontestwinners@gmail.com',
     description='tiny contest winners application',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -18,10 +18,7 @@ setup(
         'flask-wtf',
         'sqlalchemy',
         'markdown',
+        'celery',
+        'redis',
     ],
-    entry_points = {
-        'console_scripts': [
-            'tcwinners=tcw.jobs:main',
-        ],
-    },
 )

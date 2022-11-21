@@ -1,16 +1,31 @@
 import os
 
 class BaseConfig:
+    ## flask options ##
     PROJECT = 'tiny contest winners'
     DEBUG = False
     PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-    CSRF_ENABLED = True
     SECRET_KEY = os.getenv('FLASK_SECRET', 'TerribleLifeChoices')
+    CSRF_ENABLED = True
+    WFT_SECRET_KEY = os.getenv('FLASK_SECRET', 'TerribleLifeChoices')
     WTF_CSRF_ENABLED = True
-    WTF_CSRF_SECRET_KEY = os.getenv('FLASK_SECRET', 'TerribleLifeChoices')
+
+    ## database options ##
     SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI', 'sqlite://')
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    ## recaptcha options ##
+    RECAPTCHA_USE_SSL = os.getenv('RECAPTCHA_USE_SSL', True)
+    RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY', 'invalid')
+    RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', 'invalid')
+    RECAPTCHA_OPTIONS = os.getenv('RECAPTCHA_OPTIONS', {'theme': 'white'})
+
+    ## celery/redis options ##
+    TCW_BROKER_URL = os.getenv('TCW_BROKER_URL', 'redis://localhost:6379/0')
+
+    ## message options ##
+    TCW_MAIL_FROM = os.getenv('TCW_MAIL_FROM', 'notifications@website.net')
 
 
 class Development(BaseConfig):
@@ -21,6 +36,8 @@ class Development(BaseConfig):
     SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/test.db'
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
+    TCW_BROKER_URL = 'redis://localhost:6379/0'
+
 
 class Production(BaseConfig):
-    SERVER_NAME = 'tinycontestwinners.com'
+    SERVER_NAME = os.getenv('FLASK_SERVER_NAME', 'tinycontestwinners.com')

@@ -8,9 +8,14 @@
             target.setSelectionRange(0, 99999);
             document.execCommand('copy');
         }
+        window.onload = function() {
+            const e = document.getElementById('expires');
+            const d = new Date(e.value);
+            e.value = d.toDateString() + " " + d.toLocaleTimeString();
+        }
     </script>
 {% if data %}
-    <h3 class="text-center">Success! You contest is now live!</h3>
+    <h3 class="text-center">Success! Your contest is now live!</h3>
     <div class="card">
         <div class="card-body">
             <div class="container">
@@ -45,7 +50,7 @@
         </div>
     </div>
 {% else %}
-    <h2>Whoops!</h2>
-    Something went wrong. The contest data is missing. Sorry.
+    <h3>Whoops!</h3>
+    Something went wrong. The contest data is missing. Sorry. Try again.
 {% endif %}
 {% endblock %}

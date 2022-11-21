@@ -1,7 +1,9 @@
 import jinja2
 from email.message import EmailMessage
+from .templates import TEXT_TEMPLATE, HTML_TEMPLATE
 
-class TCWMessage:
+
+class Message:
     """
     Create email message for a finished contest
     """
@@ -40,40 +42,7 @@ class TCWMessage:
         Add plain text info to the email message
         """
 
-        template = '''
-{%- if contest.final %}
-{%- set winners = contest.final.split("|") %}
-Your contest has finished!
-{%- else %}
-Your contest has been created!
-{%- endif %}
-
-CONTEST TITLE:
-  - {{ contest.title }}
-
-{% if winners -%}
-WINNERS:
- {%- for name in winners %}
-  {{ loop.index }}. {{ name }}
- {%- endfor %}
-{%- endif %}
-
-STATISTICS:
-  - max entrants: {{ contest.max_entrants }}
-  - winners: {{ contest.winners }}
-  - total sign ups: {{ contest.entrants | length }}
-  - expires: {{ contest.expires }} UTC
-  {%- if not winners %}
-  - signup: https://tinycontestwinners.com/signup?name={{ contest.name }}
-  {% endif -%}
-
-THANK YOU!
-{%- if winners %}
-You are responsible for contacting the winners.
-{% endif -%}
-        '''
-
-        msg = jinja2.Template(template).render(contest=self.contest)
+        msg = jinja2.Template(TEXT_TEMPLATE).render(contest=self.contest)
         self.message.set_content(msg.strip())
 
 
@@ -82,16 +51,5 @@ You are responsible for contacting the winners.
         Add HTML formatted text into the email message
         """
 
-        template = '''
-<html>
-  <head>
-    <title>tinycontestwinners contest results!</title>
-  </head>
-  <body>
-
-  </body>
-</html>
-        '''
-
-        msg = jinja2.Template(template).render(contest=self.contest)
+        msg = jinja2.Template(HTML_TEMPLATE).render(contest=self.contest)
         self.message.add_alternative(msg.strip())

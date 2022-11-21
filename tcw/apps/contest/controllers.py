@@ -18,10 +18,7 @@ def expired_contests():
         func.count(Contest.entrants) >= Contest.max_entrants).scalar_subquery()
 
     contests = session.query(Contest).filter(
-        or_(
-            (and_( Contest.final == None, Contest.expires < now )),
-            (and_( Contest.final == None, subq ))
-        )
+        or_(Contest.expires < now, subq )
     ).all()
 
     if not contests:

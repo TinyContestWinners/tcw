@@ -6,7 +6,8 @@ import markdown
 
 def random_name(length=24):
     """
-    create random name for contests. a mix of alphanum chars
+    create random name for contests. a mix of alphanum chars.
+
     args:
         - int name length
     returns:
@@ -26,7 +27,8 @@ def random_name(length=24):
 
 def expires_time(hours=1.0):
     """
-    get a datetime object x number of hours in the future
+    get a datetime object x number of hours in the future.
+
     args:
         - float hours into the future
     returns:
@@ -41,3 +43,20 @@ def expires_time(hours=1.0):
         pass
 
     return later
+
+
+def md_to_html(txt):
+    """
+    Convert markdown text to HTML.
+
+    args:
+        - str (markdown text)
+    returns:
+        str (html text)
+    """
+
+    try:
+        html = markdown.markdown(txt)
+        return html
+    except:
+        return txt

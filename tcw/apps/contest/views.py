@@ -7,7 +7,6 @@ from .controllers import contest_by_name
 from tcw.utils import random_name, expires_time
 from tcw.database import session
 from tcw.apps.contest.models import Contest, Entrant
-# from tcw.jobs import notify_owner
 
 
 bp = Blueprint('contest', __name__, template_folder='templates')
@@ -47,7 +46,6 @@ def new():
             obj = Contest(**options)
             session.add(obj)
             session.commit()
-            # notify_owner(obj)
             options['expires'] = options['expires'].isoformat() + "Z"
         except Exception as x:
             abort(404, str(x))

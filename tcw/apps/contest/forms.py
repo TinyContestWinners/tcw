@@ -1,5 +1,5 @@
 import datetime
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import (StringField, IntegerField, HiddenField, TextAreaField,
     DateTimeField, SubmitField, SelectField)
 from wtforms.validators import DataRequired
@@ -20,6 +20,7 @@ class ContestForm(FlaskForm):
         ('24', '1 day'),
         ('72', '3 days'),
         ],  validators=[DataRequired()])
+    recaptcha = RecaptchaField()
     submit = SubmitField('submit')
 
 
