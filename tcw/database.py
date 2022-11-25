@@ -11,6 +11,7 @@ session = scoped_session(lambda: create_session( bind=engine,
 Base = declarative_base()
 Base.query = session.query_property()
 
+
 def init_db(uri, echo=False):
     """
     Initialize the database.

@@ -22,8 +22,3 @@ contest creator to notify entrants if they won.
 Once a Contest has expired, and the creator of the contest has been notified
 of the winners, all information about the contest is removed from the database.
 This information cannot be recovered.
-
-## Installation
-```
-$> pip install tcw
-```

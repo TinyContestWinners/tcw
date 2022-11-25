@@ -2,11 +2,10 @@ import datetime
 from flask import (Blueprint, render_template, redirect, request, abort,
     url_for, Response)
 from sqlalchemy.exc import IntegrityError
-from .forms import ContestForm, SignupForm
-from .controllers import contest_by_name
-from tcw.utils import random_name, expires_time
 from tcw.database import session
-from tcw.apps.contest.models import Contest, Entrant
+from tcw.utils import contest_by_name, random_name, expires_time
+from .forms import ContestForm, SignupForm
+from .models import Contest, Entrant
 
 
 bp = Blueprint('contest', __name__, template_folder='templates')

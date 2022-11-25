@@ -2,6 +2,32 @@ import string
 import secrets
 import datetime
 import markdown
+from sqlalchemy import func, or_, and_
+from .database import session
+from tcw.apps.contest.models import Contest, Entrant
+
+
+def contest_by_name(name):
+    contest = session.query(Contest).filter(Contest.name == name).one()
+    if not contest:
+        raise Exception("No contest with name %s" % name)
+
+    return contest
+
+
+def expired_contests():
+    now = datetime.datetime.utcnow()
+    subq = session.query(
+        func.count(Contest.entrants) >= Contest.max_entrants).scalar_subquery()
+
+    contests = session.query(Contest).filter(
+        or_(Contest.expires < now, subq )
+    ).all()
+
+    if not contests:
+        raise Exception("No contests that meet criteria")
+
+    return contests
 
 
 def random_name(length=24):
