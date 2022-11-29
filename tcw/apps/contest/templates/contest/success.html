@@ -15,10 +15,18 @@
         }
     </script>
 {% if data %}
-    <h3 class="text-center">Success! Your contest is now live!</h3>
-    <div class="card">
+    <h4 class="text-center">Your contest is live!</h4>
+    <div class="card" style="margin-bottom: 5.0rem;">
         <div class="card-body">
             <div class="container">
+                <h6 class="mt-4">Contest Link</h6>
+                <div class="input-group mb-3">
+                    <input type="text" value="{{ url_for('contest.signup', name=data.name, _external=True) }}" class="form-control" id="contest-link">
+                    <button class="btn btn-outline-secondary" type="button" id="copy-clibboard" onclick="copyText()">copy</button>
+                </div>
+            </div>
+            <div class="container">
+                <h6 class="mt-4">Contest Details</h6>
                 <div class="form-floating mb-2">
                     <input type="text" class="form-control" id="title" value="{{ data.title }}">
                     <label for="title" >title</label>
@@ -38,13 +46,6 @@
                 <div class="form-floating mb-2">
                     <input type="text" class="form-control" id="expires" value="{{ data.expires }}">
                     <label for="expires">expires</label>
-                </div>
-            </div>
-            <div class="container">
-                <h3 class="text-center mt-4">Contest Link</h3>
-                <div class="input-group mb-3">
-                    <input type="text" value="{{ url_for('contest.signup', name=data.name, _external=True) }}" class="form-control" id="contest-link">
-                    <button class="btn btn-outline-secondary" type="button" id="copy-clibboard" onclick="copyText()">copy</button>
                 </div>
             </div>
         </div>

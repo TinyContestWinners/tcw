@@ -21,11 +21,8 @@ class BaseConfig:
     RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', 'invalid')
     RECAPTCHA_OPTIONS = os.getenv('RECAPTCHA_OPTIONS', {'theme': 'white'})
 
-    ## celery/redis options ##
-    TCW_BROKER_URL = os.getenv('TCW_BROKER_URL', 'redis://localhost:6379/0')
-
     ## message options ##
-    TCW_MAIL_FROM = os.getenv('TCW_MAIL_FROM', 'notifications@website.net')
+    TCW_MAIL_FROM = os.getenv('TCW_MAIL_FROM', 'user@website.biz')
 
 
 class Development(BaseConfig):
@@ -36,7 +33,6 @@ class Development(BaseConfig):
     SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/test.db'
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    TCW_BROKER_URL = 'redis://localhost:6379/0'
 
 
 class Production(BaseConfig):
