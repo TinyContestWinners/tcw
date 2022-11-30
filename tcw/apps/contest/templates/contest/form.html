@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h4 class="text-center mb-4">A New Contest!</h4>
+    <h4 class="text-center mb-4">A New Raffle!</h4>
     <form method="POST">
         {{ form.hidden_tag() }}
         {{ form.csrf_token }}
@@ -24,7 +24,7 @@
             {{ form.maximum.label(for='maximum') }}
             </div>
             <div class="form-floating mb-2">
-            {{ form.winners(class_='form-control', id='winners', min=1, max=100) }}
+            {{ form.winners(class_='form-control', id='winners', min=1, max=50) }}
             {{ form.winners.label(for='winners') }}
             </div>
             <div class="form-floating mb-2">
@@ -35,7 +35,7 @@
             {{ form.recaptcha(class_='form-control') }}
             </div>
         </fieldset>
-        {{ form.submit(class_='form-control btn btn-outline-primary') }}
+        {{ form.submit(class_='form-control btn btn-primary') }}
     </form>
 
 {% endblock %}

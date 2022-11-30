@@ -8,9 +8,9 @@
             e.innerText = d.toDateString() + " " + d.toLocaleTimeString();
         }
     </script>
-    <h4 class="text-center mb-4">Contest Sign Up!</h4>
+    <h4 class="text-center mb-4">Raffle Sign Up!</h4>
     <div class="card">
-        <div class="card-header text-center">
+        <div class="card-header text-center bg-warning">
             <h6>{{ contest.title }}</h6>
             <div class="small">
                 contest expires <span id="expires">{{ contest.expires.isoformat() + "Z" }}</span>
@@ -19,7 +19,7 @@
         <div class="card-body">
             <p class="text-center">{{ contest.instructions | markdown | safe }}</p>
             {% if contest.entrants|length >= contest.max_entrants %}
-            <div class="alert alert-warning" role="alert">
+            <div class="alert alert-info" role="alert">
                 Sorry. This contest is full.
             </div>
             {% else %}

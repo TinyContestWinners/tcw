@@ -6,13 +6,13 @@ class BaseConfig:
     DEBUG = False
     PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
     SECRET_KEY = os.getenv('FLASK_SECRET', 'TerribleLifeChoices')
-    CSRF_ENABLED = True
     WFT_SECRET_KEY = os.getenv('FLASK_SECRET', 'TerribleLifeChoices')
     WTF_CSRF_ENABLED = True
+    CSRF_ENABLED = True
 
     ## database options ##
-    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI', 'sqlite://')
-    SQLALCHEMY_ECHO = False
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI', 'sqlite:////tmp/test.db')
+    SQLALCHEMY_ECHO = os.getenv('SQLALCHEMY_ECHO', False)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     ## recaptcha options ##
@@ -21,20 +21,15 @@ class BaseConfig:
     RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', 'invalid')
     RECAPTCHA_OPTIONS = os.getenv('RECAPTCHA_OPTIONS', {'theme': 'white'})
 
-    ## message options ##
-    TCW_MAIL_FROM = os.getenv('TCW_MAIL_FROM', 'user@website.biz')
-
 
 class Development(BaseConfig):
     DEBUG = True
     TESTING = True
     CSRF_ENABLED = False
     WTF_CSRF_ENABLED = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/test.db'
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
 class Production(BaseConfig):
-    # SERVER_NAME = os.getenv('FLASK_SERVER_NAME', 'tinycontestwinners.com')
-    pass
+    SERVER_NAME = os.getenv('FLASK_SERVER_NAME', 'localhost')

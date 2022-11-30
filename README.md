@@ -1,5 +1,5 @@
 # TCW: Tiny Contest Winners
-A simple web app to create ephemeral contests.
+A simple web app to create ephemeral raffle contests.
 
 ## Description
 Allows someone to create a contest. When the contest has expired, the winners
@@ -10,8 +10,9 @@ A contest is finished once its expiration time has passed, or once the max
 number of entrants is reached.
 
 ## Contest Entrants
-The contest creator is responsible for managing the link to the contest, and distributing it to potential entrants. There is no search or recovery option for
-a lost contest link.
+The contest creator is responsible for managing the signup link to the contest,
+and distributing it to potential entrants. There is no search or recovery
+option for a lost contest link.
 
 ## Notifications
 This app does not notify the winners. The contest creator will be notified by

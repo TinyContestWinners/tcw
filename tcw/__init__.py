@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
 from tcw.config import Development, Production
 from tcw.database import init_db
 
@@ -22,6 +22,7 @@ def create_app(name='tiny contest winners', config=None):
     app = Flask(name, root_path=BASEDIR)
     configure_app(app, config)
     load_filters(app)
+    load_handlers(app)
     load_blueprints(app)
     load_views()
 
@@ -72,3 +73,11 @@ def load_filters(app):
 
     from tcw.utils import md_to_html
     app.jinja_env.filters['markdown'] = md_to_html
+
+
+def page_not_found(e=None):
+    return render_template('404.html')
+
+
+def load_handlers(app):
+    app.register_error_handler(404, page_not_found)

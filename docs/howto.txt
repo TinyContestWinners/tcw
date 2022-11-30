@@ -1,0 +1,13 @@
+1. Create Contest.
+    - Title
+    - Entrant instructions
+    - Email for notification
+    - Number of winners
+    - Max number of entrants
+    - Expiration
+
+2. Copy the sign-up link.
+
+3. Send sign-up link to your friends.
+
+4. When contest has expired, the winners are chosen randomly and emailed to you.
