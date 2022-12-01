@@ -10,7 +10,7 @@ RUN pip install -e .
 COPY . /tcw
 
 ENV FLASK_RUN_HOST 0.0.0.0
-EXPOSE 80
+EXPOSE 8080
 
 # Run Flask command
-CMD ["gunicorn", "-b", "0.0.0.0:80", "tcw.run:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:8080", "tcw.run:app"]
