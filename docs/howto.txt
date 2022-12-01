@@ -1,10 +1,10 @@
 1. Create Contest.
     - Title
     - Entrant instructions
-    - Email for notification
+    - Email for final notification
     - Number of winners
     - Max number of entrants
-    - Expiration
+    - Expiration time
 
 2. Copy the sign-up link.
 
