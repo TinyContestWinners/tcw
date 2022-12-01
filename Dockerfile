@@ -1,11 +1,14 @@
 FROM python:3.10-buster
 
+# compile and install driver for postgresql
+RUN apt-get update && apt-get install -y libpq-dev gcc
+RUN pip install psycopg2
+
 RUN mkdir /tcw
 WORKDIR /tcw
 
 COPY ./requirements.txt /tcw
 RUN pip install -r requirements.txt
-RUN pip install -e .
 
 COPY . /tcw
 
