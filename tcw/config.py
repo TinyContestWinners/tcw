@@ -32,4 +32,5 @@ class Development(BaseConfig):
 
 
 class Production(BaseConfig):
-    SERVER_NAME = os.getenv('FLASK_SERVER_NAME', 'localhost')
+    # SERVER_NAME = os.getenv('FLASK_SERVER_NAME', 'localhost')
+    pass
