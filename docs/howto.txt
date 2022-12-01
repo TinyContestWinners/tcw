@@ -1,10 +1,17 @@
-1. Create Contest.
+1. Create a Contest.
     - Title
-    - Entrant instructions
+    - Entrant instructions*
     - Email for final notification
     - Number of winners
     - Max number of entrants
     - Expiration time
+
+    * Entrant Instructions:
+        Provide LOTS of clear information here. Explain the contest, but more
+        importantly, explain if users should sign up with an email address,
+        or forum username, handle, or some other info, to be contacted
+        as a winner.
+        Markdown can also be used in this field.
 
 2. Copy the sign-up link.
 

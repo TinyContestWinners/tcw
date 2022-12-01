@@ -8,7 +8,7 @@ from wtforms.fields import EmailField
 
 class ContestForm(FlaskForm):
     title = StringField('contest title', validators=[DataRequired()],)
-    instructions = TextAreaField('contest instructions', validators=[DataRequired()])
+    instructions = TextAreaField('sign-up instructions', validators=[DataRequired()])
     email = EmailField('contest owner email', validators=[DataRequired()])
     winners = IntegerField('number of winners (1-50)', validators=[DataRequired()])
     maximum = IntegerField('max number of entrants (1-500)', validators=[DataRequired()])

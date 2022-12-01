@@ -17,8 +17,8 @@ class BaseConfig:
 
     ## recaptcha options ##
     RECAPTCHA_USE_SSL = os.getenv('RECAPTCHA_USE_SSL', True)
-    RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY', 'invalid')
-    RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', 'invalid')
+    RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY', None)
+    RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', None)
     RECAPTCHA_OPTIONS = os.getenv('RECAPTCHA_OPTIONS', {'theme': 'white'})
 
 
