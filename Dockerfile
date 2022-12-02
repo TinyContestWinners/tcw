@@ -9,7 +9,6 @@ WORKDIR /tcw
 
 COPY ./requirements.txt /tcw
 RUN pip install -r requirements.txt
-# RUN pip install tcw
 
 COPY . /tcw
 
