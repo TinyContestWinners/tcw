@@ -19,6 +19,7 @@ class ContestForm(FlaskForm):
         ('12', '12 hours'),
         ('24', '1 day'),
         ('72', '3 days'),
+        ('120', '5 days'),
         ],  validators=[DataRequired()])
     recaptcha = RecaptchaField()
     submit = SubmitField('submit')
