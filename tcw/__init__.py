@@ -79,5 +79,10 @@ def page_not_found(e=None):
     return render_template('404.html')
 
 
+def page_expired(e=None):
+    return render_template('410.html')
+
+
 def load_handlers(app):
     app.register_error_handler(404, page_not_found)
+    app.register_error_handler(410, page_expired)

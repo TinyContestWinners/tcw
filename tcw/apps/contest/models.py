@@ -51,6 +51,12 @@ class MutableDict(Mutable, dict):
 
 
 class Contest(Base):
+    '''
+    NOTE: Do not use the attributes field for ANYTHING.
+    If you do, it will break the sqlalchemy subqueries that check for
+    expired contests, and tcw-tasks will break.
+    '''
+
     __tablename__ = 'contests'
 
     id = Column(Integer, primary_key=True)
@@ -78,10 +84,9 @@ class Contest(Base):
         """
 
         results = []
-
-        # not enough entrants? re-adjust winner size
+        nwinners = self.winners
         if len(self.entrants) < self.winners:
-            self.winners = len(self.entrants)
+            nwinners = len(self.entrants)
 
         choices = [e.name for e in self.entrants]
         while len(results) < self.winners:
@@ -102,3 +107,12 @@ class Entrant(Base):
     # ensure only one name sign-up per contest.
     __table_args__ = (
         UniqueConstraint('name', 'contest_id', name='_name_id_uc'),)
+
+
+class Fossil(Base):
+    __tablename__ = 'fossils'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(Unicode(48), nullable=False, unique=True)
+    expired = Column(DateTime, nullable=False, default=func.now())
+    attributes = Column(MutableDict.as_mutable(JSONEncodedDict), nullable=True)

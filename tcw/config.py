@@ -4,6 +4,7 @@ class BaseConfig:
     ## flask options ##
     PROJECT = 'tiny contest winners'
     DEBUG = False
+    TESTING = False
     PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
     SECRET_KEY = os.getenv('FLASK_SECRET', 'TerribleLifeChoices')
     WFT_SECRET_KEY = os.getenv('FLASK_SECRET', 'TerribleLifeChoices')

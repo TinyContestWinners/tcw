@@ -1,5 +1,5 @@
 import datetime
-from tcw.utils import (contest_by_name, expired_contests, random_name,
+from tcw.utils import (contest_by_name, random_name,
     expires_time, md_to_html)
 
 
@@ -19,6 +19,9 @@ def test_random_name():
 
     name2 = random_name(24)
     assert len(name2) == 24
+
+    name3 = random_name(24)
+    assert name2 != name3
 
 
 def test_future_time():

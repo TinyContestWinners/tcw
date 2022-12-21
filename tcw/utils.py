@@ -2,9 +2,8 @@ import string
 import secrets
 import datetime
 import markdown
-from sqlalchemy import func, or_, and_
 from .database import session
-from tcw.apps.contest.models import Contest, Entrant
+from tcw.apps.contest.models import Contest, Entrant, Fossil
 
 
 def contest_by_name(name):
@@ -15,19 +14,12 @@ def contest_by_name(name):
     return contest
 
 
-def expired_contests():
-    now = datetime.datetime.utcnow()
-    subq = session.query(
-        func.count(Contest.entrants) >= Contest.max_entrants).scalar_subquery()
+def fossil_by_name(name):
+    fossil = session.query(Fossil).filter(Fossil.name == name).one()
+    if not fossil:
+        raise Exception("No fossil with name %s" % name)
 
-    contests = session.query(Contest).filter(
-        or_(Contest.expires < now, subq )
-    ).all()
-
-    if not contests:
-        raise Exception("No contests that meet criteria")
-
-    return contests
+    return fossil
 
 
 def random_name(length=24):
@@ -51,7 +43,7 @@ def random_name(length=24):
     return name
 
 
-def expires_time(hours=1.0):
+def expires_time(hours=1):
     """
     get a datetime object x number of hours in the future.
 
@@ -61,9 +53,10 @@ def expires_time(hours=1.0):
         - datateime object, None on  error
     """
 
+    now = datetime.datetime.utcnow().replace(second=0, microsecond=0)
     later = None
+
     try:
-        now = datetime.datetime.utcnow().replace(second=0, microsecond=0)
         later = now + datetime.timedelta(hours=hours)
     except:
         pass

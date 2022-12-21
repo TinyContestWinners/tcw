@@ -13,7 +13,6 @@ class ContestForm(FlaskForm):
     winners = IntegerField('number of winners (1-50)', validators=[DataRequired()])
     maximum = IntegerField('max number of entrants (1-500)', validators=[DataRequired()])
     hours = SelectField('contest expires after', choices=[
-        ('0.2', '12 minutes'),
         ('1', '1 hour'),
         ('4', '4 hours'),
         ('12', '12 hours'),

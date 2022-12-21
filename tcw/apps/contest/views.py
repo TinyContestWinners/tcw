@@ -3,7 +3,8 @@ from flask import (Blueprint, render_template, redirect, request, abort,
     url_for, Response)
 from sqlalchemy.exc import IntegrityError
 from tcw.database import session
-from tcw.utils import contest_by_name, random_name, expires_time
+from tcw.utils import (contest_by_name, fossil_by_name, random_name,
+    expires_time)
 from .forms import ContestForm, SignupForm
 from .models import Contest, Entrant
 
@@ -57,14 +58,23 @@ def new():
 @bp.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignupForm()
+
     try:
         name = request.args.get('name')
-        contest = contest_by_name(name)
     except:
         abort(404)
 
+    try:
+        contest = contest_by_name(name)
+    except:
+        try:
+            fossil = fossil_by_name(name)
+        except:
+            abort(404)
+        abort(410)
+
     if form.validate_on_submit():
-        if len(contest.entrants) > contest.max_entrants:
+        if len(contest.entrants) >= contest.max_entrants:
             return render_template('contest/signup.html',
                 data=contest, form=form)
 
