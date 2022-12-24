@@ -67,8 +67,3 @@ def test_winners():
     c = contests[-1]
     winners = c.pick_winners()
     assert len(winners) == c.winners
-
-    c.attributes = {'winners': winners}
-    session.commit()
-    
-    print(c.attributes['winners'])

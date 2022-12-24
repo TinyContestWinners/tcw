@@ -1,4 +1,5 @@
 import datetime
+import logging
 from flask import (Blueprint, render_template, redirect, request, abort,
     url_for, Response)
 from sqlalchemy.exc import IntegrityError
@@ -9,6 +10,7 @@ from .forms import ContestForm, SignupForm
 from .models import Contest, Entrant
 
 
+logger = logging.getLogger(__name__)
 bp = Blueprint('contest', __name__, template_folder='templates')
 
 
@@ -48,7 +50,8 @@ def new():
             session.commit()
             options['expires'] = options['expires'].isoformat() + "Z"
         except Exception as x:
-            abort(404, str(x))
+            logger.warning(x)
+            abort(404)
 
         return redirect(url_for('contest.success', **options))
 
@@ -61,7 +64,8 @@ def signup():
 
     try:
         name = request.args.get('name')
-    except:
+    except Exception as x:
+        logger.warning(x)
         abort(404)
 
     try:
@@ -93,7 +97,8 @@ def signup():
             session.rollback()
             return render_template('contest/sorry.html',
                 contest=contest, form=form)
-        except:
+        except Exception as x:
+            logg
             abort(404)
     else:
         return render_template('contest/signup.html',
