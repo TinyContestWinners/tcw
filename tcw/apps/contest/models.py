@@ -85,6 +85,9 @@ class Contest(Base):
 
         results = []
         nwinners = self.winners
+        if len(self.entrants) == 0:
+            return []
+
         if len(self.entrants) < self.winners:
             nwinners = len(self.entrants)
 
