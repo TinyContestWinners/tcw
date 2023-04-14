@@ -10,7 +10,7 @@
     ];
 
     var CONVERSATIONS = [
-        {class: "me", text: "&#127928;<br>Hey fans! Enter to win copies of our new album. click <a href='https://tinycontestwinners.com/signup?name=12344567'>here</a>!"},
+        {class: "me", text: "&#127928;<br>Hey fans! Enter to win copies of our new album. click <a href='#'>here</a>!"},
         {class: "them", text: "So excited for the new record!! &#128149;"},
         {class: "them", text: "I just signed up! TCW is cool!"},
     ];
@@ -115,7 +115,7 @@
         }, next_time);
 
         // change to next slide
-        next_time += 2500;
+        next_time += 3000;
         setTimeout(function() {
             advanceCarousel('carousel');
         }, next_time);
@@ -129,7 +129,7 @@
 
         }, next_time);
 
-        next_time += 1000;
+        next_time += 2000;
         setTimeout(function() {
             let e = document.getElementById('example-copy');
             e.disabled = false;
@@ -137,13 +137,13 @@
         }, next_time);
 
         // change to next slide
-        next_time += 2500;
+        next_time += 3000;
         setTimeout(function() {
             advanceCarousel('carousel');
         }, next_time);
 
         // animate messages
-        next_time += 1200
+        next_time += 2000
         for (let i = 0; i < CONVERSATIONS.length; i++) {
             let obj = CONVERSATIONS[i];
             let parent = document.getElementById('example-conversation');

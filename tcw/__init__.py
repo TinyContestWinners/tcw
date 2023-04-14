@@ -7,7 +7,7 @@ from tcw.database import init_db
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
 
-def create_app(name='tiny contest winners', config=None):
+def create_app(name='tiny contest winners', config=None, root=None):
     """
     Create the Flask app
 
@@ -19,7 +19,10 @@ def create_app(name='tiny contest winners', config=None):
     if config is None:
         config = Development
 
-    app = Flask(name, root_path=BASEDIR)
+    if root is None:
+        root = BASEDIR
+
+    app = Flask(name, root_path=root)
     configure_app(app, config)
     load_filters(app)
     load_handlers(app)
