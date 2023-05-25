@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setup(
     name='tcw',
-    version='0.1.2',
+    version='0.1.6',
     author='J Leary',
     author_email='tinycontestwinners@gmail.com',
     description='tiny contest winners application',
@@ -13,6 +13,9 @@ setup(
     long_description_content_type='text/markdown',
     include_package_data=True,
     packages=find_packages(),
+    package_data = {
+        '': ['*.html'],
+    },
     install_requires=[
         'flask',
         'flask-wtf',

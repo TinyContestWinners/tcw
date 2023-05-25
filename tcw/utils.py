@@ -2,22 +2,31 @@ import string
 import secrets
 import datetime
 import markdown
+from tcw.apps.contest.models import Contest, Fossil
 from .database import session
-from tcw.apps.contest.models import Contest, Entrant, Fossil
+from .exc import ContestNotFound, FossilNotFound
 
 
 def contest_by_name(name):
+    """
+    Get contest object by name
+    """
+
     contest = session.query(Contest).filter(Contest.name == name).one()
     if not contest:
-        raise Exception("No contest with name %s" % name)
+        raise ContestNotFound(f"No contest with name {name}")
 
     return contest
 
 
 def fossil_by_name(name):
+    """
+    Get fossil object by name
+    """
+
     fossil = session.query(Fossil).filter(Fossil.name == name).one()
     if not fossil:
-        raise Exception("No fossil with name %s" % name)
+        raise FossilNotFound(f"No fossil with name {name}")
 
     return fossil
 
@@ -54,12 +63,7 @@ def expires_time(hours=1):
     """
 
     now = datetime.datetime.utcnow().replace(second=0, microsecond=0)
-    later = None
-
-    try:
-        later = now + datetime.timedelta(hours=hours)
-    except:
-        pass
+    later = now + datetime.timedelta(hours=hours)
 
     return later
 
@@ -74,8 +78,5 @@ def md_to_html(txt):
         str (html text)
     """
 
-    try:
-        html = markdown.markdown(txt)
-        return html
-    except:
-        return txt
+    html = markdown.markdown(txt)
+    return html

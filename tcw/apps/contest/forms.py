@@ -1,12 +1,15 @@
-import datetime
 from flask_wtf import FlaskForm, RecaptchaField
-from wtforms import (StringField, IntegerField, HiddenField, TextAreaField,
-    DateTimeField, SubmitField, SelectField)
+from wtforms import (StringField, IntegerField, TextAreaField, SubmitField,
+    SelectField)
 from wtforms.validators import DataRequired
 from wtforms.fields import EmailField
 
 
 class ContestForm(FlaskForm):
+    """
+    Form definition class for new contest    
+    """
+
     title = StringField('contest title', validators=[DataRequired()],)
     instructions = TextAreaField('sign-up instructions', validators=[DataRequired()])
     email = EmailField('contest owner email', validators=[DataRequired()])
@@ -25,5 +28,9 @@ class ContestForm(FlaskForm):
 
 
 class SignupForm(FlaskForm):
+    """
+    Form definition for user signup form
+    """
+
     name = StringField('sign up!')
     submit = SubmitField('submit')

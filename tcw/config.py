@@ -1,6 +1,10 @@
 import os
 
 class BaseConfig:
+    """
+    Parent class
+    """
+
     ## flask options ##
     PROJECT = 'tiny contest winners'
     DEBUG = False
@@ -13,17 +17,21 @@ class BaseConfig:
 
     ## database options ##
     SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI', 'sqlite:////tmp/test.db')
-    SQLALCHEMY_ECHO = os.getenv('SQLALCHEMY_ECHO', False)
+    SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     ## recaptcha options ##
-    RECAPTCHA_USE_SSL = os.getenv('RECAPTCHA_USE_SSL', True)
+    RECAPTCHA_USE_SSL = True
     RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY', None)
     RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', None)
-    RECAPTCHA_OPTIONS = os.getenv('RECAPTCHA_OPTIONS', {'theme': 'white'})
+    RECAPTCHA_OPTIONS = {'theme': 'white'}
 
 
 class Development(BaseConfig):
+    """
+    For development environment only
+    """
+
     DEBUG = True
     TESTING = True
     CSRF_ENABLED = False
@@ -33,5 +41,9 @@ class Development(BaseConfig):
 
 
 class Production(BaseConfig):
+    """
+    For production environment only
+    """
+
     # SERVER_NAME = os.getenv('FLASK_SERVER_NAME', 'localhost')
     pass

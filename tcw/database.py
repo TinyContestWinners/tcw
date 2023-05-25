@@ -1,6 +1,8 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker, create_session
+from sqlalchemy.orm import scoped_session, create_session
 from sqlalchemy.ext.declarative import declarative_base
+from tcw.apps.contest.models import Contest, Fossil, Entrant
+
 
 # globals #
 engine = None
@@ -25,7 +27,7 @@ def init_db(uri, echo=False):
     init_tables()
 
 
-def init_engine(uri, *args, **kwargs):
+def init_engine(uri, **kwargs):
     """
     initialize the global engine for sessions.
 
@@ -43,5 +45,4 @@ def init_tables():
     Initialize database tables for app models.
     """
 
-    from tcw.apps.contest.models import Contest, Entrant
     Base.metadata.create_all(bind=engine)

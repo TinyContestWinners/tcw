@@ -7,4 +7,4 @@ modules = [
     'tcw-tasks'
 ]
 
-subprocess.run(["pip", "install"] + modules)
+subprocess.run(["pip", "install", "--upgrade", "--force-reinstall"] + modules)
